@@ -1,0 +1,56 @@
+---
+title: "STAT-244-SC"
+---
+
+# Final Project Report
+
+-   May 1, 2025
+-   Eonbi Choi, Yerim Oh
+
+## Datasets
+
+The Formula 1 data used in this study are obtained from the f1dataR R package that accesses Formula 1 data via the FastF1 Python library. The dataset includes lap-by-lap session data from the 2024 Miami Grand Prix and comprise 1111 laps and 32 variables. These variables include driver details, lap times, pit in/out times, tire information, and track status.
+
+**Source**: R Package 'f1dataR'
+
+-   **Description**: <https://cran.r-project.org/web/packages/f1dataR/f1dataR.pdf>
+
+-   **Data sources**: Obtain Formula 1 data via the unofficial API <https://www.formula1.com/en/timing/f1-live> via the 'fastf1' 'Python' library <https://docs.fastf1.dev/>.
+
+-   Last accessed date/time: April 28, 2025 16:51 PM
+
+### Variables
+
+quantitative variable:
+
+-   `lap_time`: recorded time to complete a lap (seconds)
+
+-   `lap_number`: lap number from which the telemetry data was recorded (number of laps)
+
+-   `tyre_life`: number of laps completed on a set of tires (number of laps)
+
+categorical variable:
+
+-   `compound`: type of tire used (SOFT, MEDIUM, HARD)
+
+-   `pit_in`: whether a driver made a pit stop during a lap (binary: 0 = no pit stop, 1 = pit stop occured)
+
+#### Check missing values
+
+![](finalProject_images/missingData)
+
+Data for `lap_time` are missing 5 values which are less than 0.1% of the entire observation
+
+## Data Visualization
+
+Scatter plot of `lap_num` vs. `pit_in`
+![](finalProject_images/ggplot)
+
+Relationship of `lap_number` and `pit_in`
+![](finalProject_images/barplot)
+
+Density plot of `lap_time` of each team
+![](finalProject_images/densityplot)
+
+Boxplot of `compound` vs. `tyre_life`
+![](finalProject_images/boxplot)

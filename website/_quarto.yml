@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "oh23y.github.io"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: stat244.qmd
+        text: STAT244-SC
+
+format:
+  html:
+    theme: sketchy
+    css: styles.css
+    toc: true
+
+editor: visual
+
