@@ -1,0 +1,226 @@
+---
+title: "FPCP2"
+subtitle: "STAT 244"
+author: "Eonbi Choi, Yerim Oh"
+format: pdf
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+library(readr)
+library(purrr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(mosaic)
+library(gmodels)
+library(Sleuth3)
+library(visdat)
+```
+
+## Data
+
+```{r}
+load("data/lap_dat.Rdata")
+head(lap_dat)
+```
+
+## Part 1: Data Context
+
+### 1. Variables in the data set that are interesting
+
+quantitative variable:
+
+-   `lap_time`: recorded time to complete a lap (seconds)
+
+-   `lap_number`: lap number from which the telemetry data was recorded (number of laps)
+
+-   `tyre_life`: number of laps completed on a set of tires (number of laps)
+
+categorical variable:
+
+-   `compound`: type of tire used (SOFT, MEDIUM, HARD)
+
+-   `pit_in`: whether a driver made a pit stop during a lap (binary: 0 = no pit stop, 1 = pit stop occured)
+
+### 2. One observational unit (row) represent in the data set
+
+```{r}
+head(lap_dat,1)
+```
+
+Each observational unit represents all records from one lap
+
+### 3. How the sample was obtained
+
+-   The Formula 1 data used in this study are obtained from the f1dataR R package that accesses Formula 1 data via the FastF1 Python library. The dataset includes lap-by-lap session data from the 2024 Miami Grand Prix and comprise 1111 laps and 32 variables.
+
+-   Description: <https://cran.r-project.org/web/packages/f1dataR/f1dataR.pdf>
+
+-   Data sources: Obtain Formula 1 data via [the unofficial API](https://www.formula1.com/en/timing/f1-live) and [the 'fastf1' 'Python' library](https://docs.fastf1.dev/).
+
+-   Last accessed date/time: April 28, 2025 16:51 PM
+
+### 4. Ulterior motive for collecting the data
+
+Could the data collectors have an ulterior motive for collecting the data (e.g., solicitation of private information)? Could the data collectors have an ulterior motive for collecting a biased sample, or otherwise misrepresenting the population in any way (e.g., trying to reinforce a predetermined narrative)?
+
+-   No, the data is collected from the telemetry systems, that includes sensors connected to the machine (cars in Formula 1) and wireless transmission through multiple networks.
+
+### 5. Reliable Source
+
+Do you think the source of your data is reliable? Do you trust how the data was collected?
+
+-   Yes, the package uses data from Formula 1's live timing services. There could still be minor errors because of the connected sensors.
+
+## Part 2: Data Cleaning
+
+### 1. Clean/Rearrange Data
+
+```{r}
+# clean data
+miami2024 <- lap_dat %>%
+  select(lap_time, lap_number, compound, tyre_life) %>%
+  mutate(compound = as.factor(compound),
+         pit_in = ifelse(is.nan(lap_dat$pit_in_time), 0, 1))
+head(miami2024)
+```
+
+### 2. Check missing values
+
+```{r}
+vis_miss(miami2024)
+
+#calculate extend of missingness
+sum(is.na(miami2024$lap_time))
+```
+
+Data for `lap_time` are missing five values which are less than 0.1% of the entire observation.
+
+```{r}
+# drop missing values
+miami2024_complete <- na.omit(miami2024)
+
+dim(miami2024_complete)
+```
+
+number of observational units: **1106**
+
+### 3. Why certain data points are missing
+
+Out of 5 missing lap time records four records have a track status code of 41. However, no description of this code value is provided in the API. Thus, we assume that either the track was not fully cleared or conditions were not suitable for racing. The other missing record was due to a driver failing to complete a lap due to collision.
+
+## Part 3: Exploratory Data Analysis
+
+### 1. Numerical summaries that are relevant
+
+#### Quantitative variables
+
+#### `lap_time`:
+
+```{r}
+summary(miami2024_complete$lap_time)
+sd(miami2024_complete$lap_time)
+var(miami2024_complete$lap_time)
+```
+
+#### `lap_number`:
+
+```{r}
+summary(miami2024_complete$lap_number)
+```
+
+#### `tyre_life`:
+
+```{r}
+summary(miami2024_complete$tyre_life)
+sd(miami2024_complete$tyre_life)
+var(miami2024_complete$tyre_life)
+```
+
+#### Categorical variables
+
+#### `compound`:
+
+```{r}
+counts(miami2024_complete$compound)
+props(miami2024_complete$compound)
+```
+
+#### `pit_in`:
+
+```{r}
+counts(miami2024_complete$pit_in)
+props(miami2024_complete$pit_in)
+```
+
+### 2. Data visualizations
+
+Our response variable: `pit_in`
+
+```{r}
+ggplot(data = miami2024_complete,
+       mapping = aes(x = lap_number, y = pit_in)) +
+  geom_point() +
+  theme_bw()
+```
+
+Relationship of `lap_number` and `pit_in`
+
+```{r}
+lapnum_pit <- data.frame(lap_num = rep(NA, 57),
+                         pit_num = rep(NA, 57))
+for (i in 1:57){
+  lapnum_pit$lap_num[i] <- i
+  lapnum_pit$pit_num[i] <- count(miami2024_complete$pit_in == 1 &
+                               miami2024_complete$lap_number == i)
+}
+  
+ggplot(lapnum_pit, aes(x = lap_num, y = pit_num)) +
+  geom_bar(stat = "identity") +
+  labs(title = "number of pitstops for each lap",
+       x = "lap_number", y = "number of pit stops") +
+  theme_bw()
+```
+
+Density plot for `lap_time`
+
+```{r}
+cols <- c("#FF87BC", "#229971", "#E80020", "#B6BABD", "#52E252",
+          "#FF8000", "#27F4D2", "#6692FF", "#3671C6", "#64C4FF")
+
+lap_dat %>%
+  ggplot(aes(x=lap_time, fill=team)) +
+  geom_density(colour="black", alpha=0.5, show.legend=FALSE) +
+  facet_wrap(~team, scales="free_x") + 
+  scale_fill_manual(values = cols) +
+  labs(x = "Time for one lap (sec)", y = "Frequency",
+       title = "lap time for each team") +
+  theme_bw()
+```
+
+Box plot of `compound` vs `tyre_life`
+
+```{r}
+# new data that stores the tyre life at each pit stop
+compound_life <- data.frame(compound = character(),
+                            tyre_life = double())
+for (i in 1:nrow(miami2024_complete)){
+  if (miami2024_complete$pit_in[i] == 1) {
+    compound_life <- compound_life %>%
+      add_row(compound = miami2024_complete$compound[i],
+              tyre_life = miami2024_complete $tyre_life[i])
+  }
+}
+head(compound_life)
+```
+
+```{r}
+ggplot(compound_life, aes(x = compound, y = tyre_life, fill=compound)) + 
+  geom_boxplot() +
+  labs(x = "Tyre compound", y = "Tyre life",
+       title = "Tyre life for each compound") + 
+  scale_fill_manual(values = c("#f0f0f0", "#edde09", "#ed0909")) +
+  theme_bw()
+```

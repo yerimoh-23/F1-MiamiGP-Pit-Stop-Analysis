@@ -1,0 +1,553 @@
+---
+title: "FPCP3"
+subtitle: "STAT 244"
+author: "Eonbi Choi, Yerim Oh"
+format: pdf
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+library(readr)
+library(purrr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(mosaic)
+library(gmodels)
+library(Sleuth3)
+library(visdat)
+library(tidyverse)
+library(tidymodels)
+library(yardstick)
+library(MASS)
+library(caret)
+```
+
+## Cleaned Up Data
+
+```{r}
+load("data/lap_dat.Rdata")
+
+
+# variables we are going to use
+miami2024 <- lap_dat %>%
+   dplyr::select(lap_time, lap_number, compound, tyre_life) %>%
+  mutate(compound = as.factor(compound),
+         pit_in = ifelse(is.nan(lap_dat$pit_in_time), 0, 1))
+
+# drop missing values
+miami2024_complete <- na.omit(miami2024)
+head(miami2024_complete)
+```
+
+------------------------------------------------------------------------
+
+\newpage
+
+# Cross Validation
+
+### Brief introduction to CV
+
+-   Cross-validation is a statistical method used to evaluate how well a model performs by splitting the data into multiple subsets to train the model on some subsets and validate it on the remaining subsets.
+
+    #### Goal:
+
+    Provide a more reliable and unbiased estimate of a model's performance predicting new data, in order to detect overfitting and improve model generalization
+
+#### Research questions
+
+1.  Were drivers more likely to make pit stops when their lap time was longer and their tires were older compared to when their lap time was shorter and their tires were less used?
+
+2.  Were drivers more likely to make pit stops when their lap times were longer, their tires were older, and considering the type of tires they were using and their progress in the race?
+
+#### Linear models considering based on the research question
+
+-   **Model 1**:
+
+$$\mathbb{E}(pit\_in \mid lap\_time,\ tyre\_life) = \beta_0 + \beta_1(lap\_time) + \beta_2(tyre\_life)$$
+
+-   **Model 2**:
+
+$$
+\begin{aligned}
+\mathbb{E}(pit\_in \mid lap\_time, \ lap\_number, \ compound, \ tyre\_life)  &= \beta_0 + \beta_1(lap\_time) \\ &+ \beta_2(lap\_number) + \beta_3(compound) \\ &+ \beta_4(tyre\_life)
+\end{aligned}
+$$
+
+```{r}
+# STEP 1: Model Specification
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+# STEP 2: Model estimation
+# first linear model
+pit_lm1 <- lm_spec %>%
+  fit(pit_in ~ lap_time + tyre_life,
+      data = miami2024_complete)
+pit_lm1 %>% tidy()
+
+# second linear model
+pit_lm2 <- lm_spec %>%
+  fit(pit_in ~ lap_time + lap_number + compound + tyre_life,
+      data = miami2024_complete)
+pit_lm2 %>% tidy()
+```
+
+#### Dividing data into test set and training set
+
+-   **k-fold CV**: We can use k-fold cross-validation to estimate the typical error in our model predictions for new data:
+
+    -   Divide the data into $k$ folds (or groups) of approximately equal size.
+    -   Repeat the following procedures for each fold $j = 1,2,...,k$:
+        -   Remove fold $j$ from the data set.
+        -   Fit a model using the data in the other $k-1$ folds (training).
+        -   Use this model to predict the responses for the $n_j$ cases in fold $j$: $\hat{y}_1, ..., \hat{y}_{n_j}$.
+        -   Calculate the MAE/MSE for fold $j$ (testing):
+    -   Combine this information into one measure of model quality
+
+### Error metric to use
+
+-   Mean absolute error (MAE) of an estimator measures the absolute difference between the predicted values and the actual values in the dataset. Its advantage is that its
+
+    -   $\text{MAE}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} |y_i - \hat{y}_i|$
+    -   $\text{CV}_{(k)} = \frac{1}{k} \sum_{j=1}^k \text{MAE}_j$
+
+-   Mean squared error (MSE) of an estimator measures the average squared difference between the predicted values and the actual values in the dataset.
+
+    -   $\text{MSE}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} (y_i - \hat{y}_i)^2$
+    -   $\text{CV}_{(k)} = \frac{1}{k} \sum_{j=1}^k \text{MSE}_j$
+
+#### MAE vs. MSE
+
+The advantage of using MAE is that it's more robust to outliers, giving equal weight to all errors. Thus, it's more suitable when outliers are not a significant concern.
+
+On the other hand, MSE gives more weight to larger errors than smaller ones, making it highly sensitive to outliers. MSE is more suitable when the risk of prediction mistakes is crucial and the goal is to minimize the risk of errors.
+
+Since outliers are less of a concern for us as they don't lead to any life threatening or other major issues, we prioritize models that are directly interpretable. Our data is less common and less familiar to many people, so we decided to choose a model based on MAE.
+
+```{r}
+# in-sample MAE and sd
+pit_lm1 %>% augment(new_data = miami2024_complete) %>%
+  mae(truth = pit_in, estimate = .pred)
+sigma(pit_lm1$fit)
+
+pit_lm2 %>% augment(new_data = miami2024_complete) %>%
+  mae(truth = pit_in, estimate = .pred)
+sigma(pit_lm2$fit)
+```
+
+### k-fold CV implementation for k=10
+
+**Model 1**
+
+```{r}
+# set seed for reproducibility
+set.seed(123)
+
+pit_lm1_cv = lm_spec %>%
+  fit_resamples(
+    pit_in ~ lap_time + tyre_life,
+    resamples = vfold_cv(miami2024_complete, v = 10),
+    metrics = metric_set(mae, rmse)
+  )
+pit_lm1_cv %>% collect_metrics()
+
+# get fold-by-fold results
+pit_lm1_cv %>% unnest(.metrics) %>%
+  filter(.metric == "mae")
+```
+
+-   Based on the random folds above, the MAE was best for fold 1 with an MAE of approximately 0.037 and worst for fold 3 with an MAE of 0.061 approximately.
+
+**Model 2**
+
+```{r}
+# set seed for reproducibility
+set.seed(123)
+
+pit_lm2_cv = lm_spec %>%
+  fit_resamples(
+    pit_in ~ lap_time + lap_number + compound + tyre_life,
+    resamples = vfold_cv(miami2024_complete, v = 10),
+    metrics = metric_set(mae, rmse)
+  )
+pit_lm2_cv %>% collect_metrics()
+
+# get fold-by-fold results
+pit_lm2_cv %>% unnest(.metrics) %>%
+  filter(.metric == "mae")
+```
+
+-   Based on the random folds above, MAE was best for fold 1 (0.044) and worst for fold 3 (0.070).
+
+```{r}
+# 10-fold CV MAE and sd
+pit_lm1_cv %>% unnest(.metrics) %>%
+  filter(.metric == "mae") %>%
+  summarize(mean = mean(.estimate), sd = sd(.estimate))
+
+pit_lm2_cv %>% unnest(.metrics) %>%
+  filter(.metric == "mae") %>%
+  summarize(mean = mean(.estimate), sd = sd(.estimate))
+```
+
+In-sample and 10-fold CV MAE and standard deviation for both models.
+
++------------+---------------+----------------+--------------+---------------+
+| Model      | In-sample MAE | 10-fold CV MAE | In-sample SD | 10-fold CV SD |
++:===========+==============:+===============:+=============:+==============:+
+| `model_1`  | 0.05045       | 0.05100        | 0.15247      | 0.00931       |
++------------+---------------+----------------+--------------+---------------+
+| `model_2`  | 0.05975       | 0.05939        | 0.15035      | 0.00829       |
++------------+---------------+----------------+--------------+---------------+
+
+## Different values of k
+
+### k = 5
+
+**Model 1**
+
+```{r}
+# set seed for reproducibility
+set.seed(123)
+
+pit_lm1_k5 = lm_spec %>%
+  fit_resamples(
+    pit_in ~ lap_time + tyre_life,
+    resamples = vfold_cv(miami2024_complete, v = 5),
+    metrics = metric_set(mae, rmse)
+  )
+pit_lm1_k5 %>% collect_metrics()
+
+# get fold-by-fold results
+pit_lm1_k5 %>% unnest(.metrics) %>%
+  filter(.metric == "mae")
+```
+
+-   Based on the random folds above, MAE was best for fold 1 (0.048) and worst for fold 2 (0.056).
+
+**Model 2**
+
+```{r}
+# set seed for reproducibility
+set.seed(123)
+
+pit_lm2_k5 = lm_spec %>%
+  fit_resamples(
+    pit_in ~ lap_time + lap_number + compound + tyre_life,
+    resamples = vfold_cv(miami2024_complete, v = 5),
+    metrics = metric_set(mae, rmse)
+  )
+pit_lm2_k5 %>% collect_metrics()
+
+# get fold-by-fold results
+pit_lm2_k5 %>% unnest(.metrics) %>%
+  filter(.metric == "mae")
+```
+
+-   Based on the random folds above, MAE was best for fold 1 (0.053) and worst for fold 2 (0.062).
+
+```{r}
+# 5-fold CV MAE and sd
+pit_lm1_k5 %>% unnest(.metrics) %>%
+  filter(.metric == "mae") %>%
+  summarize(mean = mean(.estimate), sd = sd(.estimate))
+
+pit_lm2_k5 %>% unnest(.metrics) %>%
+  filter(.metric == "mae") %>%
+  summarize(mean = mean(.estimate), sd = sd(.estimate))
+```
+
+In-sample and 5-fold CV MAE and standard deviation for both models.
+
++------------+---------------+---------------+--------------+--------------+
+| Model      | In-sample MAE | 5-fold CV MAE | In-sample SD | 5-fold CV SD |
++:===========+==============:+==============:+=============:+=============:+
+| `model_1`  | 0.05045       | 0.05073       | 0.15247      | 0.00356      |
++------------+---------------+---------------+--------------+--------------+
+| `model_2`  | 0.05975       | 0.05922       | 0.15035      | 0.00360      |
++------------+---------------+---------------+--------------+--------------+
+
+### k = 20
+
+**Model 1**
+
+```{r}
+# set seed for reproducibility
+set.seed(123)
+
+pit_lm1_k20 = lm_spec %>%
+  fit_resamples(
+    pit_in ~ lap_time + tyre_life,
+    resamples = vfold_cv(miami2024_complete, v = 20),
+    metrics = metric_set(mae, rmse)
+  )
+pit_lm1_k20 %>% collect_metrics()
+
+# get fold-by-fold results
+pit_lm1_k20 %>% unnest(.metrics) %>%
+  filter(.metric == "mae")
+```
+
+-   Based on the random folds above, MAE was best for fold 10 (0.026) and worst for fold 20 (0.090).
+
+**Model 2**
+
+```{r}
+# set seed for reproducibility
+set.seed(123)
+
+pit_lm2_k20 = lm_spec %>%
+  fit_resamples(
+    pit_in ~ lap_time + lap_number + compound + tyre_life,
+    resamples = vfold_cv(miami2024_complete, v = 20),
+    metrics = metric_set(mae, rmse)
+  )
+pit_lm2_k20 %>% collect_metrics()
+
+# get fold-by-fold results
+pit_lm2_k20 %>% unnest(.metrics) %>%
+  filter(.metric == "mae")
+```
+
+-   Based on the random folds above, MAE was best for fold 10 (0.032) and worst for fold 20 (0.101).
+
+```{r}
+# 20-fold CV MAE and sd
+pit_lm1_k20 %>% unnest(.metrics) %>%
+  filter(.metric == "mae") %>%
+  summarize(mean = mean(.estimate), sd = sd(.estimate))
+
+pit_lm2_k20 %>% unnest(.metrics) %>%
+  filter(.metric == "mae") %>%
+  summarize(mean = mean(.estimate), sd = sd(.estimate))
+```
+
+In-sample and 20-fold CV MAE and standard deviation for both models.
+
++------------+---------------+----------------+--------------+---------------+
+| Model      | In-sample MAE | 20-fold CV MAE | In-sample SD | 20-fold CV SD |
++:===========+==============:+===============:+=============:+==============:+
+| `model_1`  | 0.05045       | 0.05086        | 0.15247      | 0.01785       |
++------------+---------------+----------------+--------------+---------------+
+| `model_2`  | 0.05975       | 0.05925        | 0.15035      | 0.01781       |
++------------+---------------+----------------+--------------+---------------+
+
+### Compare different values of k
+
+| Model     | 5-fold CV MAE | 10-fold CV MAE | 20-fold CV MAE |
+|-----------|--------------:|---------------:|---------------:|
+| `model_1` |       0.05073 |        0.05100 |        0.05086 |
+| `model_2` |       0.05922 |        0.05939 |        0.05925 |
+
+For both models, k=5 has the smallest CV error.
+
+## Final model based on the smallest CV error
+
+All of the above results suggests `model_1` is the better model than `model_2`.
+
+Therefore, our final model based on the smallest CV error is:
+
+$$\mathbb{E}(pit\_in \mid lap\_time,\ tyre\_life) = \beta_0 + \beta_1(lap\_time) + \beta_2(tyre\_life)$$
+
+------------------------------------------------------------------------
+
+\newpage
+
+# Logistic Regression
+
+## Variables of interest
+
+### Predictors
+
+1.  `lap_time`: recorded time to complete a lap (seconds)
+2.  `lap_number`: lap number from which the telemetry data was recorded (number of laps)
+3.  `tyre_life`: number of laps completed on a set of tires (number of laps)
+4.  `compound`: type of tire used (SOFT, MEDIUM, HARD)
+
+### Response variable
+
+-   `pit_in`: whether a driver made a pit stop during a lap (binary: 0 = no pit stop, 1 = pit stop occurred)
+
+    \begin{align*}
+    Y_i &= \begin{cases} 1 & \text{ if a driver pitted on a lap } \\ 0 & \text{ otherwise (i.e., the driver did not pit on lap)} \end{cases}
+    \end{align*}
+
+## Our logistic regression model
+
+We are interested in determining the probability of making a pit stop during the 2024 Miami Grand Prix, considering factors such as lap time, track progress, tire age, and the type of tire used.
+
+$$
+\begin{aligned} 
+\log(odds(pit\_in \mid lap\_time, \ lap\_number, \ tyre\_life, \ compound)) &= \beta_0 + \beta_1 (lap\_time) \\ &+ \beta_2(lap\_number) + \beta_3 (tyre\_life) \\ &+ \beta_4 \ I(compound = MEDIUM) \\ &+ \beta_5 \ I(compound = SOFT)
+\end{aligned}
+$$
+
+```{r}
+# factor `pit_in` for logistic regression analysis
+miami2024_glm <- miami2024_complete %>%
+  mutate(pit_in_fac = as.factor(pit_in))
+```
+
+```{r}
+# logistic regression model
+logistic_fit <- train(
+  form   = pit_in_fac ~ lap_time + lap_number + tyre_life + compound,
+  data   = miami2024_glm,
+  family = "binomial", # this is an argument to glm; response is 0 or 1, binomial
+  method = "glm",      # method for fit; "generalized linear model"
+  trControl = trainControl(method = "none")
+)
+
+summary(logistic_fit$finalModel)
+```
+
+### Interpretation of exponentiated $\hat{\beta}$ coefficients
+
+```{r}
+exp(logistic_fit$finalModel$coefficients)
+```
+
+-   $\exp(\beta_0)$: The odds of a driver making a pit stop during a lap, when lap time is 0 seconds, lap number is 0, 0 laps have been completed on the current set of tires, and the HARD compound is, is approximately $9.4088 \times 10^{-9}$.
+
+-   $\exp(\beta_1)$: For every of 1 second increase in lap time, the odds of a driver pitting increase by a factor of 1.1473.
+
+-   $\exp(\beta_2)$: For every additional lap (i.e., increase of 1 in the lap number), we expect the odds of a driver pitting to increase by a factor of 0.8521.
+
+-   $\exp(\beta_3)$: For each additional lap completed on the current set of tires, the odds of a driver pitting increase by a factor of 1.3166.
+
+-   $\exp(\beta_4)$: When using MEDIUM compound tires instead of HARD, the odds of a driver pitting increase by a factor of 1.6404, holding all other variables constant.
+
+-   $\exp(\beta_5)$: When using SOFT compound tires instead of HARD, we expect the odds of a driver pitting to increase by a factor of 6.4324, holding all other variables constant.
+
+#### Mathematically derive $\exp(\beta_1)$
+
+$$
+\begin{aligned}
+&\log(odds(pit\_in \mid lap\_time = a)) = -18.4816 + 0.1374a
+\\
+\\ 
+&\log(odds(pit\_in \mid lap\_time = a+1)) = -18.4816 + 0.1374(a+1)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+& \log\left( \frac{odds(pit\_in \mid lap\_time = a+1)}{odds(pit\_in \mid lap\_time = a)} \right)\\
+&= \log(odds(pit\_in \mid lap\_time = a+1)) - \log(odds(pit\_in \mid lap\_time = a)) \\
+&= (-18.4816 + 0.1374(a+1)) - (-18.4816 + 0.1374) \\
+&= 0.1374  \\
+&= \hat{\beta_1}
+\end{aligned}
+$$
+
+Therefore, $\exp(\beta_1) = e^{0.1374} = 1.1473$
+
+### Predicting High Probability of a Pit Stop
+
+To predict a probability of a driver making a pit stop that is very close to 1, we need to input extreme values for the predictors. Based on the five-number summary of our data, we use the following scenario: a lap time of 148.74 seconds, lap number 57, SOFT compound, and a tire age of 45 laps.
+
+```{r}
+# miami2024_glm %>% 
+#   ggplot(aes(x=lap_time)) +
+#     geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8)
+
+summary(miami2024_glm)
+```
+
+```{r}
+log_prid_fst <- predict(logistic_fit$finalModel,
+            newdata = data.frame(lap_time = 148.74,
+                                 lap_number = 57,
+                                 tyre_life = 45,
+                                 compoundMEDIUM = 0,
+                                 compoundSOFT = 1),
+            type = "response")
+    
+odds_pitting_fst = exp(log_prid_fst)
+(prob_pitting_fst = odds_pitting_fst/(1+odds_pitting_fst))
+```
+
+Using our logistic regression model, we estimate the probability of a pit stop under these conditions to be approximately 0.731. This indicates a high likelihood of a pit stop given these extreme race conditions.
+
+### Predicting Pit Stops with our Logistic Regression Model
+
+-   Estimate the probability of a driver making a pit stop on a lap with the following conditions: 96.00 seconds lap time, 28th lap, 14.78 laps completed on a set of HARD tires.
+
+    ```{r}
+    log_prid_hard <- predict(logistic_fit$finalModel,
+            newdata = data.frame(lap_time = 96,
+                                 lap_number = 28,
+                                 tyre_life = 14.78,
+                                 compoundMEDIUM = 0,
+                                 compoundSOFT = 0),
+            type = "response")
+
+    odds_pitting_hard = exp(log_prid_hard)
+    (prob_pitting_hard = odds_pitting_hard/(1+odds_pitting_hard))
+    ```
+
+There is approximately a 50.08% probability that a driver will make a pit stop on this lap when using HARD tires, holding all other variables constant.
+
+<!-- -->
+
+-   Estimate the probability of a driver making a pit stop on a lap under the same conditions as above but using a set of MEDIUM tires.
+
+    ```{r}
+    log_prid_med <- predict(logistic_fit$finalModel,
+            newdata = data.frame(lap_time = 96,
+                                 lap_number = 28,
+                                 tyre_life = 14.78,
+                                 compoundMEDIUM = 1,
+                                 compoundSOFT = 0),
+            type = "response")
+
+    odds_pitting_med = exp(log_prid_med)
+    (prob_pitting_med = odds_pitting_med/(1+odds_pitting_med))
+    ```
+
+With MEDIUM tires, the probability of making a pit stop increases to 50.14%.
+
+<!-- -->
+
+-   Estimate the probability of a driver making a pit stop on a lap under the same conditions as above but using a set of SOFT tires.
+
+    ```{r}
+    log_prid_soft <- predict(logistic_fit$finalModel,
+            newdata = data.frame(lap_time = 96,
+                                 lap_number = 28,
+                                 tyre_life = 14.78,
+                                 compoundMEDIUM = 0,
+                                 compoundSOFT = 1),
+            type = "response")
+
+    odds_pitting_soft = exp(log_prid_soft)
+    (prob_pitting_soft = odds_pitting_soft/(1+odds_pitting_soft))
+    ```
+
+With SOFT tires, the probability increases slightly to 50.52%.
+
+While all the other variables stay the same, we predict that the probability a driver to made a pit stop is higher if the driver is on a set of SOFT tires compared to other compounds.
+
+### Pros/Cons of logistic regression vs. regular linear regression
+
+**Logistic Regression**
+
++-----------+-------------------------------------------------------------------------------------------------------------------+
+| **Pros**  | Since logistic regression is based on a Bernoulli/binomial likelihood, it is a natural model for binary outcomes. |
+|           |                                                                                                                   |
+|           | Coefficients are interpretable in terms of odds ratios (with log-odds as the linear predictor).                   |
++-----------+-------------------------------------------------------------------------------------------------------------------+
+| **Cons**  | The relationship between predictors and the probability is not linear.                                            |
++-----------+-------------------------------------------------------------------------------------------------------------------+
+
+**Linear Regression**
+
++------------+--------------------------------------------------------------------------+
+| **Pros**   | Straightforward linear regression                                        |
+|            |                                                                          |
+|            | Easy to interpret the coefficients                                       |
++------------+--------------------------------------------------------------------------+
+| **Cons**   | Cannot gaurantee that the predicted probabilities to be between 0 and 1. |
++------------+--------------------------------------------------------------------------+
