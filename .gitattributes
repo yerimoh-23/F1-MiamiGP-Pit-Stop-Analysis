@@ -2,3 +2,5 @@
 *.Rmd linguist-language=R
 *.qmd linguist-detectable=true
 *.qmd linguist-language=R
+*.html linguist-detectable=true
+*.css linguist-detectable=true
