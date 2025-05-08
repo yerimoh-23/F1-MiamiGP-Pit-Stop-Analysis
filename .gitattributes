@@ -1,0 +1,4 @@
+*.Rmd linguist-detectable=true
+*.Rmd linguist-language=R
+*.qmd linguist-detectable=true
+*.qmd linguist-language=R
