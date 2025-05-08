@@ -22,17 +22,11 @@ library(caret)
 # F1 Miami Grand Prix 2024 Pit Stop Analysis
 
 ## Abstract
-This study employs different regression models to predict when a driver to make a pit stop at during a race, based on the Formula 1 Miami Grand Prix 2024 data. The dataset includes various indicators (32 variables), such as driver details, lap times, pit in/out times, tire information, and track status, for 1111 laps. The aim of this analysis is to estimate pit stop timing based on tire and lap information. The models demonstrate that tire compound, lap number, etc. are significant predictors of pit stop behavior, offering insights into strategic decision-making in race management.
+In sports, data is collected to record athletes’ performances, which helps in making decisions to improve outcomes. In Formula 1 and other motorsports, tire management plays an important role in race strategy. Tires directly impact car performance as they are in contact with the track and transfers all the car’s power and movements to the track surface. Tire degradation influences major decisions such as pit stop timing during a race, where minor misjudgments can result in serious consequences in a fast-paced sports like Formula 1. Our study evaluates the relationship between pit stop laps and tire and lap information though employing linear regression models, cross validation, k-fold cross validation, and logistic regression. The objective is to improve pit stop timing prediction to facilitate effective strategic planning for optimizing pit stop timing, ultimately giving drivers a decisive advantage in race management.
 
 ## Datasets
 
-The Formula 1 data used in this study are obtained from the f1dataR R package that accesses Formula 1 data via the FastF1 Python library. The dataset includes lap-by-lap session data from the 2024 Miami Grand Prix and comprise 1111 laps and 32 variables. These variables include driver details, lap times, pit in/out times, tire information, and track status.
-
-**Source**: R Package 'f1dataR'
-
--   **Description**: <https://cran.r-project.org/web/packages/f1dataR/f1dataR.pdf>
-
--   **Data sources**: Obtain Formula 1 data via the unofficial API <https://www.formula1.com/en/timing/f1-live> via the 'fastf1' 'Python' library <https://docs.fastf1.dev/>.
+The data used in this study were obtained from the f1dataR R package that accesses Formula 1 data via the [FastF1 Python library](https://docs.fastf1.dev/). The dataset includes lap-by-lap session data from the 2024 Miami Grand Prix and comprise 1,111 laps and 32 variables. These variables include driver details, lap times, pit in/out times, tire information, and track status. More detailed information about this package can be found in its [API documentation](https://cran.r-project.org/web/packages/f1dataR/f1dataR.pdf).
 
 -   Last accessed date/time: April 28, 2025 16:51 PM
 
@@ -91,14 +85,17 @@ Our response variable:`pit_in`
 
 **Number of pit stops for each lap**
 ![](https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/barplot.png)
+- This plot shows the frequency of pit stops across laps during the 2024 Miami Grand Prix. It helps visualize when teams tend to stop during the race. Many teams pitted to change tires during the first half of the race and the most common pit stop occurring around lap 28. This race was unique in that some drivers performed a one-stop strategy, while others went for a two-stop approach. These decisions were influenced by various factors such as track position, gaps to nearby drivers, tire condition, and more. Pit stops in the later stages of the race likely reflect either a two-stop strategy or an attempt to set the fastest lap and earn an extra point.
+
 
 **Density plot for lap time of each team**
 ![](https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/densityplot.png)
+- This plot shows the distribution of lap times for each team during the race. We can compare the performance and variability in lap times across different teams. For most teams, the lap times are generally under 100 seconds, with some laps approaching 110 seconds. These patterns are largely consistent across teams, though some, such as Mercedes and Williams, show a few outliers on the higher end, which indicates occasional slower laps.
 - A smaller lap time in Formula 1 means that the driver completed a lap more quickly. In racing, lower lap times are better because they indicate higher performance.
 
 **Box plot of tire life for each compound**
 ![](https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/boxplot.png)
-- The tire compound directly affects tire life, and the relationship is based on a trade-off between performance (speed/grip) and durability. Therefore, the softer the compound, the shorter the tire life.
+- The plot shows the distribution of tire life (measured in laps) for each tire compound used in the race. On average, hard tires lasted very slightly longer than medium tires. Since hard and medium compounds were the most commonly used in this race, we have limited data on soft tires, roughly a quarter as much. This resulted in a narrower distribution for the soft compound. The tire compound directly affects tire life, with a trade-off between performance (speed and grip) and durability. As a result, softer compounds tend to wear out more quickly than harder ones.
 
 **Number of tires for each compound**
 ![](https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/barplot_cpd.png)
@@ -142,6 +139,8 @@ pit_lm2 <- lm_spec %>%
   fit(pit_in ~ lap_time + lap_number + compound + tyre_life, data = miami2024)
 pit_lm2 %>% tidy()
 ```
+
+The regression results show that drivers were slightly more likely to make pit stops when their lap times were longer and their tires were older. In the extended model, lap time and tire age remained strong predictors and suggested that there are fewer stops later in the race with lap number having a slight negative effect. Tire compound had a small and non-significant effect. This indicates that tire compound did not meaningfully influence pit stop decisions when other factors were considered.
 
 ## Cross Validation
 
@@ -256,6 +255,10 @@ In-sample and 5-fold CV MAE and standard deviation for both models.
 | `model_2`  | 0.05975       | 0.05922       | 0.15035      | 0.00360      |
 +------------+---------------+---------------+--------------+--------------+
 
+5-fold cross-validation was used to assess the performance of two models predicting pit stops. Model 1, using only lap time and tire life, achieved a mean MAE of 0.05073 with a low standard deviation (0.00356). Model 2, which adds lap number and tire compound, had a higher mean MAE of 0.05922 with a similar standard deviation (0.00360).
+
+Although Model 2 includes more predictors, it performed slightly worse than Model 1 in both cross-validation and in-sample metrics. This suggests that the additional variables do not improve prediction. Model 1 is therefore more accurate and efficient for predicting pit stops.
+
 : \vspace{10pt}
 
 ### k=10
@@ -322,6 +325,8 @@ In-sample and 10-fold CV MAE and standard deviation for both models.
 +------------+---------------+----------------+--------------+---------------+
 | `model_2`  | 0.05975       | 0.05939        | 0.15035      | 0.00829       |
 +------------+---------------+----------------+--------------+---------------+
+
+With 10-fold cross-validation, Model 1 had a mean MAE of 0.0510, while Model 2 had a slightly higher MAE of 0.0594. Both models showed low standard deviations approximately 0.009. As in the 5-fold case, Model 1 remained slightly more accurate and stable than Model 2.
 
 : \vspace{10pt}
 
@@ -390,6 +395,8 @@ In-sample and 20-fold CV MAE and standard deviation for both models.
 | `model_2`  | 0.05975       | 0.05925        | 0.15035      | 0.01781       |
 +------------+---------------+----------------+--------------+---------------+
 
+In the 20-fold CV setup, Model 1 performed better than Model 2 with a lower mean MAE, 0.05086 and 0.05925, respectively. Even with increased fold, the simpler model generalized better across the dataset.
+
 : \vspace{10pt}
 
 ### Compare different values of k
@@ -406,7 +413,7 @@ In-sample and 20-fold CV MAE and standard deviation for both models.
 
 ## Final model based on the smallest CV error
 
-All of the above results suggests `model_1` is the better model than `model_2`.
+Across all cross-validation settings (5, 10, and 20-fold), Model 1 consistently showed lower MAE than Model 2. The differences were small but consistent and this suggests that Model 1 is a better model than Model 2 in predicting pit-stops.
 
 Therefore, our final model based on the smallest CV error is:
 
@@ -611,4 +618,9 @@ While all the other variables stay the same, we predict that the probability a d
 | **Cons**    | Cannot gaurantee that the predicted probabilities to be between 0 and 1. |
 +-------------+--------------------------------------------------------------------------+
 
+# Conclusion
+
+The linear and logistic regression models provide a practical method for predicting pit-stop laps based on multiple factors, while k-fold cross-validation offers an approach for selecting the most optimized models. However, the prediction results from the logistic model were somewhat limited, with predictions averaging around 50% even with extreme parameters, making it challenging to accurately predict pit-stop laps. This limitation is understandable because predicting pit-stop timing in real races is one of the most crucial and difficult decisions in race strategy.
+
+For future studies, we could consider additional factors that influence car speeds or tire management, as well as apply methods that are capable of handling more complex models to observed more detailed and comprehensive analyses.
 

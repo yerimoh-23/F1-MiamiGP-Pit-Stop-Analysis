@@ -6,7 +6,7 @@
 F1 Miami Grand Prix 2024 Pit Stop Analysis
 
 ## Abstract
-This study employs different regression models to predict when a driver to make a pit stop at during a race, based on the Formula 1 Miami Grand Prix 2024 data. The dataset includes various indicators (32 variables), such as driver details, lap times, pit in/out times, tire information, and track status, for 1111 laps. The aim of this analysis is to estimate pit stop timing based on tire and lap information. The models demonstrate that tire compound, lap number, etc. are significant predictors of pit stop behavior, offering insights into strategic decision-making in race management.
+In sports, data is collected to record athletes’ performances, which helps in making decisions to improve outcomes. In Formula 1 and other motorsports, tire management plays an important role in race strategy. Tires directly impact car performance as they are in contact with the track and transfers all the car’s power and movements to the track surface. Tire degradation influences major decisions such as pit stop timing during a race, where minor misjudgments can result in serious consequences in a fast-paced sports like Formula 1. Our study evaluates the relationship between pit stop laps and tire and lap information though employing linear regression models, cross validation, k-fold cross validation, and logistic regression. The objective is to improve pit stop timing prediction to facilitate effective strategic planning for optimizing pit stop timing, ultimately giving drivers a decisive advantage in race management.
 
 ## Website
 https://yerimoh-23.github.io/F1-MiamiGP-Pit-Stop-Analysis/stat244.html
