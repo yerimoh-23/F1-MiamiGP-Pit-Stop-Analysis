@@ -1,3 +1,6 @@
+doc/** linguist-documentation=false
+doc/** linguist-vendored=false
+
 *.Rmd linguist-detectable=true
 *.Rmd linguist-language=R
 *.qmd linguist-detectable=true
