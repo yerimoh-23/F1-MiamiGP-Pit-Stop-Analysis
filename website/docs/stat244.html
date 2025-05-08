@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>STAT-244-SC – oh23y.github.io</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">oh23y.github.io</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./stat244.html" aria-current="page"> 
+<span class="menu-text">STAT244-SC</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#final-project-report" id="toc-final-project-report" class="nav-link active" data-scroll-target="#final-project-report">Final Project Report</a></li>
+  <li><a href="#f1-miami-grand-prix-2024-pit-stop-analysis" id="toc-f1-miami-grand-prix-2024-pit-stop-analysis" class="nav-link" data-scroll-target="#f1-miami-grand-prix-2024-pit-stop-analysis">F1 Miami Grand Prix 2024 Pit Stop Analysis</a>
+  <ul class="collapse">
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a>
+  <ul class="collapse">
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#cleanrearrange-data" id="toc-cleanrearrange-data" class="nav-link" data-scroll-target="#cleanrearrange-data">Clean/Rearrange Data</a></li>
+  </ul></li>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
+  </ul></li>
+  <li><a href="#linear-regression-model" id="toc-linear-regression-model" class="nav-link" data-scroll-target="#linear-regression-model">Linear Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link" data-scroll-target="#research-questions">Research questions</a>
+  <ul class="collapse">
+  <li><a href="#linear-models-considering-based-on-the-research-question" id="toc-linear-models-considering-based-on-the-research-question" class="nav-link" data-scroll-target="#linear-models-considering-based-on-the-research-question">Linear models considering based on the research question</a></li>
+  </ul></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross Validation</a>
+  <ul class="collapse">
+  <li><a href="#dividing-data-into-test-set-and-training-set" id="toc-dividing-data-into-test-set-and-training-set" class="nav-link" data-scroll-target="#dividing-data-into-test-set-and-training-set">Dividing data into test set and training set</a></li>
+  <li><a href="#error-metric-to-use" id="toc-error-metric-to-use" class="nav-link" data-scroll-target="#error-metric-to-use">Error metric to use</a></li>
+  </ul></li>
+  <li><a href="#k-fold-cv-implementation-for-different-values-of-k" id="toc-k-fold-cv-implementation-for-different-values-of-k" class="nav-link" data-scroll-target="#k-fold-cv-implementation-for-different-values-of-k">k-fold CV implementation for different values of k</a>
+  <ul class="collapse">
+  <li><a href="#k5" id="toc-k5" class="nav-link" data-scroll-target="#k5">k=5</a></li>
+  <li><a href="#k10" id="toc-k10" class="nav-link" data-scroll-target="#k10">k=10</a></li>
+  <li><a href="#k-20" id="toc-k-20" class="nav-link" data-scroll-target="#k-20">k = 20</a></li>
+  <li><a href="#compare-different-values-of-k" id="toc-compare-different-values-of-k" class="nav-link" data-scroll-target="#compare-different-values-of-k">Compare different values of k</a></li>
+  </ul></li>
+  <li><a href="#final-model-based-on-the-smallest-cv-error" id="toc-final-model-based-on-the-smallest-cv-error" class="nav-link" data-scroll-target="#final-model-based-on-the-smallest-cv-error">Final model based on the smallest CV error</a></li>
+  </ul></li>
+  <li><a href="#logistic-regression-model" id="toc-logistic-regression-model" class="nav-link" data-scroll-target="#logistic-regression-model">Logistic Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#variables-of-interest" id="toc-variables-of-interest" class="nav-link" data-scroll-target="#variables-of-interest">Variables of interest</a>
+  <ul class="collapse">
+  <li><a href="#predictors" id="toc-predictors" class="nav-link" data-scroll-target="#predictors">Predictors</a></li>
+  <li><a href="#response-variable" id="toc-response-variable" class="nav-link" data-scroll-target="#response-variable">Response variable</a></li>
+  </ul></li>
+  <li><a href="#our-logistic-regression-model" id="toc-our-logistic-regression-model" class="nav-link" data-scroll-target="#our-logistic-regression-model">Our logistic regression model</a>
+  <ul class="collapse">
+  <li><a href="#interpretation-of-exponentiated-hatbeta-coefficients" id="toc-interpretation-of-exponentiated-hatbeta-coefficients" class="nav-link" data-scroll-target="#interpretation-of-exponentiated-hatbeta-coefficients">Interpretation of exponentiated <span class="math inline">\(\hat{\beta}\)</span> coefficients</a></li>
+  <li><a href="#predicting-high-probability-of-a-pit-stop" id="toc-predicting-high-probability-of-a-pit-stop" class="nav-link" data-scroll-target="#predicting-high-probability-of-a-pit-stop">Predicting High Probability of a Pit Stop</a></li>
+  <li><a href="#predicting-pit-stops-with-our-logistic-regression-model" id="toc-predicting-pit-stops-with-our-logistic-regression-model" class="nav-link" data-scroll-target="#predicting-pit-stops-with-our-logistic-regression-model">Predicting Pit Stops with our Logistic Regression Model</a></li>
+  </ul></li>
+  <li><a href="#proscons-of-logistic-regression-vs.-regular-linear-regression" id="toc-proscons-of-logistic-regression-vs.-regular-linear-regression" class="nav-link" data-scroll-target="#proscons-of-logistic-regression-vs.-regular-linear-regression">Pros/Cons of logistic regression vs.&nbsp;regular linear regression</a>
+  <ul class="collapse">
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression">Linear Regression</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">STAT-244-SC</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="final-project-report" class="level1">
+<h1>Final Project Report</h1>
+<ul>
+<li>May 8, 2025</li>
+<li>Eonbi Choi, Yerim Oh</li>
+</ul>
+</section>
+<section id="f1-miami-grand-prix-2024-pit-stop-analysis" class="level1">
+<h1>F1 Miami Grand Prix 2024 Pit Stop Analysis</h1>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>This study employs different regression models to predict when a driver to make a pit stop at during a race, based on the Formula 1 Miami Grand Prix 2024 data. The dataset includes various indicators (32 variables), such as driver details, lap times, pit in/out times, tire information, and track status, for 1111 laps. The aim of this analysis is to estimate pit stop timing based on tire and lap information. The models demonstrate that tire compound, lap number, etc. are significant predictors of pit stop behavior, offering insights into strategic decision-making in race management.</p>
+</section>
+<section id="datasets" class="level2">
+<h2 class="anchored" data-anchor-id="datasets">Datasets</h2>
+<p>The Formula 1 data used in this study are obtained from the f1dataR R package that accesses Formula 1 data via the FastF1 Python library. The dataset includes lap-by-lap session data from the 2024 Miami Grand Prix and comprise 1111 laps and 32 variables. These variables include driver details, lap times, pit in/out times, tire information, and track status.</p>
+<p><strong>Source</strong>: R Package ‘f1dataR’</p>
+<ul>
+<li><p><strong>Description</strong>: <a href="https://cran.r-project.org/web/packages/f1dataR/f1dataR.pdf" class="uri">https://cran.r-project.org/web/packages/f1dataR/f1dataR.pdf</a></p></li>
+<li><p><strong>Data sources</strong>: Obtain Formula 1 data via the unofficial API <a href="https://www.formula1.com/en/timing/f1-live" class="uri">https://www.formula1.com/en/timing/f1-live</a> via the ‘fastf1’ ‘Python’ library <a href="https://docs.fastf1.dev/" class="uri">https://docs.fastf1.dev/</a>.</p></li>
+<li><p>Last accessed date/time: April 28, 2025 16:51 PM</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 32
+   time driver driver_number lap_time lap_number stint pit_out_time pit_in_time
+  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+1 3438. VER    1                 94.3          1     1          NaN         NaN
+2 3531. VER    1                 93.1          2     1          NaN         NaN
+3 3624. VER    1                 93.1          3     1          NaN         NaN
+4 3717. VER    1                 93.5          4     1          NaN         NaN
+5 3810. VER    1                 92.8          5     1          NaN         NaN
+6 3903. VER    1                 92.9          6     1          NaN         NaN
+# ℹ 24 more variables: sector1time &lt;dbl&gt;, sector2time &lt;dbl&gt;, sector3time &lt;dbl&gt;,
+#   sector1session_time &lt;dbl&gt;, sector2session_time &lt;dbl&gt;,
+#   sector3session_time &lt;dbl&gt;, speed_i1 &lt;dbl&gt;, speed_i2 &lt;dbl&gt;, speed_fl &lt;dbl&gt;,
+#   speed_st &lt;dbl&gt;, is_personal_best &lt;list&gt;, compound &lt;chr&gt;, tyre_life &lt;dbl&gt;,
+#   fresh_tyre &lt;lgl&gt;, team &lt;chr&gt;, lap_start_time &lt;dbl&gt;, lap_start_date &lt;dttm&gt;,
+#   track_status &lt;chr&gt;, position &lt;dbl&gt;, deleted &lt;lgl&gt;, deleted_reason &lt;chr&gt;,
+#   fast_f1generated &lt;lgl&gt;, is_accurate &lt;lgl&gt;, session_type &lt;chr&gt;</code></pre>
+</div>
+</div>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<p>quantitative variable:</p>
+<ul>
+<li><p><code>lap_time</code>: recorded time to complete a lap (seconds)</p></li>
+<li><p><code>lap_number</code>: lap number from which the telemetry data was recorded (number of laps)</p></li>
+<li><p><code>tyre_life</code>: number of laps completed on a set of tires (number of laps)</p></li>
+</ul>
+<p>categorical variable:</p>
+<ul>
+<li><p><code>compound</code>: type of tire used (SOFT, MEDIUM, HARD)</p></li>
+<li><p><code>pit_in</code>: whether a driver made a pit stop during a lap (binary: 0 = no pit stop, 1 = pit stop occured)</p></li>
+</ul>
+</section>
+<section id="cleanrearrange-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleanrearrange-data">Clean/Rearrange Data</h3>
+<p>Rearrange data to consist only the variables we are interested in</p>
+<section id="check-missing-values" class="level4">
+<h4 class="anchored" data-anchor-id="check-missing-values">Check missing values</h4>
+<p><img src="https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/missing_data.png" class="img-fluid"></p>
+<p>Data for <code>lap_time</code> are missing 5 values which are less than 0.1% of the entire observation</p>
+</section>
+<section id="finalize-data-we-are-going-to-use" class="level4">
+<h4 class="anchored" data-anchor-id="finalize-data-we-are-going-to-use">Finalize data we are going to use</h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  lap_time lap_number compound tyre_life pit_in
+     &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt;  &lt;dbl&gt;
+1     94.3          1 MEDIUM           1      0
+2     93.1          2 MEDIUM           2      0
+3     93.1          3 MEDIUM           3      0
+4     93.5          4 MEDIUM           4      0
+5     92.8          5 MEDIUM           5      0
+6     92.9          6 MEDIUM           6      0</code></pre>
+</div>
+</div>
+</section>
+<section id="why-certain-data-points-are-missing" class="level4">
+<h4 class="anchored" data-anchor-id="why-certain-data-points-are-missing">Why certain data points are missing</h4>
+<p>Out of 5 missing lap time records four records have a track status code of 41. However, no description of this code value is provided in the API. Thus, we assume that either the track was not fully cleared or conditions were not suitable for racing. The other missing record was due to a driver failing to complete a lap due to collision.</p>
+</section>
+</section>
+</section>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
+<p>Our response variable:<code>pit_in</code></p>
+<p><img src="https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/geompoint.png" class="img-fluid"></p>
+<p><strong>Number of pit stops for each lap</strong> <img src="https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/barplot.png" class="img-fluid"></p>
+<p><strong>Density plot for lap time of each team</strong> <img src="https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/densityplot.png" class="img-fluid"> - A smaller lap time in Formula 1 means that the driver completed a lap more quickly. In racing, lower lap times are better because they indicate higher performance.</p>
+<p><strong>Box plot of tire life for each compound</strong> <img src="https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/boxplot.png" class="img-fluid"> - The tire compound directly affects tire life, and the relationship is based on a trade-off between performance (speed/grip) and durability. Therefore, the softer the compound, the shorter the tire life.</p>
+<p><strong>Number of tires for each compound</strong> <img src="https://raw.githubusercontent.com/yerimoh-23/F1-MiamiGP-Pit-Stop-Analysis/main/website_img/barplot_cpd.png" class="img-fluid"> - Since the tire life is shorter for the softer compounds, but has a better performance, the drivers preferred MEDIUM tire to balance the trade-off.</p>
+</section>
+</section>
+<section id="linear-regression-model" class="level1">
+<h1>Linear Regression Model</h1>
+<section id="research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="research-questions">Research questions</h2>
+<ol type="1">
+<li>Were drivers more likely to make pit stops when their lap time was longer and their tires were older compared to when their lap time was shorter and their tires were less used?</li>
+<li>Were drivers more likely to make pit stops when their lap times were longer, their tires were older, and considering the type of tires they were using and their progress in the race?</li>
+</ol>
+<section id="linear-models-considering-based-on-the-research-question" class="level3">
+<h3 class="anchored" data-anchor-id="linear-models-considering-based-on-the-research-question">Linear models considering based on the research question</h3>
+<ul>
+<li><p><strong>Model 1</strong>: <span class="math display">\[
+\mathbb{E}(pit\_in \mid lap\_time,\ tyre\_life) = \beta_0 + \beta_1(lap\_time) + \beta_2(tyre\_life)
+\]</span></p></li>
+<li><p><strong>Model 2</strong>: <span class="math display">\[
+\begin{aligned}
+\mathbb{E}(pit\_in \mid lap\_time, \ lap\_number, \ compound, \ tyre\_life)  &amp;= \beta_0 + \beta_1(lap\_time) \\ &amp;+ \beta_2(lap\_number) + \beta_3(compound) \\ &amp;+ \beta_4(tyre\_life)
+\end{aligned}
+\]</span></p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: Model Specification</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lm_spec <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"regression"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"lm"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 2: Model estimation</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># first linear model</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>pit_lm1 <span class="ot">&lt;-</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> tyre_life, <span class="at">data =</span> miami2024)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>pit_lm1 <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept) -0.422    0.0543       -7.77 1.74e-14
+2 lap_time     0.00429  0.000537      7.98 3.63e-15
+3 tyre_life    0.00243  0.000509      4.79 1.94e- 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># second linear model</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pit_lm2 <span class="ot">&lt;-</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> lap_number <span class="sc">+</span> compound <span class="sc">+</span> tyre_life, <span class="at">data =</span> miami2024)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pit_lm2 <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  term           estimate std.error statistic  p.value
+  &lt;chr&gt;             &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)    -0.446    0.0544       -8.21 6.32e-16
+2 lap_time        0.00468  0.000534      8.76 7.32e-18
+3 lap_number     -0.00214  0.000387     -5.54 3.88e- 8
+4 compoundMEDIUM  0.0117   0.00936       1.25 2.10e- 1
+5 compoundSOFT    0.0312   0.0240        1.30 1.93e- 1
+6 tyre_life       0.00519  0.000698      7.44 1.97e-13</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="cross-validation">Cross Validation</h2>
+<p>Cross-validation is a statistical method used to evaluate how well a model performs by splitting the data into multiple subsets to train the model on some subsets and validate it on the remaining subsets.</p>
+<ul>
+<li><strong>Goal</strong>: Provide a more reliable and unbiased estimate of a model’s performance predicting new data, in order to detect overfitting and improve model generalization</li>
+</ul>
+<section id="dividing-data-into-test-set-and-training-set" class="level3">
+<h3 class="anchored" data-anchor-id="dividing-data-into-test-set-and-training-set">Dividing data into test set and training set</h3>
+<ul>
+<li><p><strong>k-fold CV</strong>: We can use k-fold cross-validation to estimate the typical error in our model predictions for new data:</p>
+<ul>
+<li>Divide the data into <span class="math inline">\(k\)</span> folds (or groups) of approximately equal size.</li>
+<li>Repeat the following procedures for each fold <span class="math inline">\(j = 1,2,...,k\)</span>:
+<ul>
+<li>Remove fold <span class="math inline">\(j\)</span> from the data set.</li>
+<li>Fit a model using the data in the other <span class="math inline">\(k-1\)</span> folds (training).</li>
+<li>Use this model to predict the responses for the <span class="math inline">\(n_j\)</span> cases in fold <span class="math inline">\(j\)</span>: <span class="math inline">\(\hat{y}_1, ..., \hat{y}_{n_j}\)</span>.</li>
+<li>Calculate the MAE/MSE for fold <span class="math inline">\(j\)</span> (testing):</li>
+</ul></li>
+<li>Combine this information into one measure of model quality</li>
+</ul></li>
+</ul>
+</section>
+<section id="error-metric-to-use" class="level3">
+<h3 class="anchored" data-anchor-id="error-metric-to-use">Error metric to use</h3>
+<ul>
+<li><p>Mean absolute error (MAE) of an estimator measures the absolute difference between the predicted values and the actual values in the dataset.</p>
+<ul>
+<li><span class="math inline">\(\text{MAE}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} |y_i - \hat{y}_i|\)</span></li>
+<li><span class="math inline">\(\text{CV}_{(k)} = \frac{1}{k} \sum_{j=1}^k \text{MAE}_j\)</span></li>
+</ul></li>
+<li><p>Mean squared error (MSE) of an estimator measures the average squared difference between the predicted values and the actual values in the dataset.</p>
+<ul>
+<li><span class="math inline">\(\text{MSE}_j = \frac{1}{n_j}\sum_{i=1}^{n_j} (y_i - \hat{y}_i)^2\)</span></li>
+<li><span class="math inline">\(\text{CV}_{(k)} = \frac{1}{k} \sum_{j=1}^k \text{MSE}_j\)</span></li>
+</ul></li>
+</ul>
+<section id="mae-vs.-mse" class="level4">
+<h4 class="anchored" data-anchor-id="mae-vs.-mse">MAE vs.&nbsp;MSE</h4>
+<p>The advantage of using MAE is that it’s more robust to outliers, giving equal weight to all errors. Thus, it’s more suitable when outliers are not a significant concern.</p>
+<p>On the other hand, MSE gives more weight to larger errors than smaller ones, making it highly sensitive to outliers. MSE is more suitable when the risk of prediction mistakes is crucial and the goal is to minimize the risk of errors.</p>
+<p>Since outliers are less of a concern for us as they don’t lead to any life threatening or other major issues, we prioritize models that are directly interpretable. Our data is less common and less familiar to many people, so we decided to choose a model based on MAE.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pit_lm1 <span class="sc">%&gt;%</span> <span class="fu">augment</span>(<span class="at">new_data =</span> miami2024) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mae</span>(<span class="at">truth =</span> pit_in, <span class="at">estimate =</span> .pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 mae     standard      0.0505</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pit_lm2 <span class="sc">%&gt;%</span> <span class="fu">augment</span>(<span class="at">new_data =</span> miami2024) <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mae</span>(<span class="at">truth =</span> pit_in, <span class="at">estimate =</span> .pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  .metric .estimator .estimate
+  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+1 mae     standard      0.0587</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="k-fold-cv-implementation-for-different-values-of-k" class="level2">
+<h2 class="anchored" data-anchor-id="k-fold-cv-implementation-for-different-values-of-k">k-fold CV implementation for different values of k</h2>
+<section id="k5" class="level3">
+<h3 class="anchored" data-anchor-id="k5">k=5</h3>
+<p><strong>Model 1</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>pit_lm1_k5 <span class="ot">=</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> tyre_life,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> <span class="fu">vfold_cv</span>(miami2024, <span class="at">v =</span> <span class="dv">5</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(mae, rmse)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pit_lm1_k5 <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 mae     standard   0.0507     5 0.00159 Preprocessor1_Model1
+2 rmse    standard   0.152      5 0.00536 Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get fold-by-fold results</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pit_lm1_k5 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 7
+  splits            id    .metric .estimator .estimate .config          .notes  
+  &lt;list&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;list&gt;  
+1 &lt;split [884/222]&gt; Fold1 mae     standard      0.0477 Preprocessor1_M… &lt;tibble&gt;
+2 &lt;split [885/221]&gt; Fold2 mae     standard      0.0560 Preprocessor1_M… &lt;tibble&gt;
+3 &lt;split [885/221]&gt; Fold3 mae     standard      0.0528 Preprocessor1_M… &lt;tibble&gt;
+4 &lt;split [885/221]&gt; Fold4 mae     standard      0.0486 Preprocessor1_M… &lt;tibble&gt;
+5 &lt;split [885/221]&gt; Fold5 mae     standard      0.0485 Preprocessor1_M… &lt;tibble&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Based on the random folds above, MAE was best for fold 1 (0.048) and worst for fold 2 (0.056).</li>
+</ul>
+<p><strong>Model 2</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>pit_lm2_k5 <span class="ot">=</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> lap_number <span class="sc">+</span> compound <span class="sc">+</span> tyre_life,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> <span class="fu">vfold_cv</span>(miami2024, <span class="at">v =</span> <span class="dv">5</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(mae, rmse)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>pit_lm2_k5 <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 mae     standard   0.0592     5 0.00161 Preprocessor1_Model1
+2 rmse    standard   0.150      5 0.00490 Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get fold-by-fold results</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pit_lm2_k5 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 7
+  splits            id    .metric .estimator .estimate .config          .notes  
+  &lt;list&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;list&gt;  
+1 &lt;split [884/222]&gt; Fold1 mae     standard      0.0533 Preprocessor1_M… &lt;tibble&gt;
+2 &lt;split [885/221]&gt; Fold2 mae     standard      0.0621 Preprocessor1_M… &lt;tibble&gt;
+3 &lt;split [885/221]&gt; Fold3 mae     standard      0.0617 Preprocessor1_M… &lt;tibble&gt;
+4 &lt;split [885/221]&gt; Fold4 mae     standard      0.0585 Preprocessor1_M… &lt;tibble&gt;
+5 &lt;split [885/221]&gt; Fold5 mae     standard      0.0606 Preprocessor1_M… &lt;tibble&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Based on the random folds above, MAE was best for fold 1 (0.053) and worst for fold 2 (0.062).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5-fold CV MAE and sd</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pit_lm1_k5 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(.estimate), <span class="at">sd =</span> <span class="fu">sd</span>(.estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    mean      sd
+   &lt;dbl&gt;   &lt;dbl&gt;
+1 0.0507 0.00356</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pit_lm2_k5 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(.estimate), <span class="at">sd =</span> <span class="fu">sd</span>(.estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    mean      sd
+   &lt;dbl&gt;   &lt;dbl&gt;
+1 0.0592 0.00360</code></pre>
+</div>
+</div>
+<p>In-sample and 5-fold CV MAE and standard deviation for both models.</p>
+<table class="caption-top table">
+<caption></caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 19%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">In-sample MAE</th>
+<th style="text-align: right;">5-fold CV MAE</th>
+<th style="text-align: right;">In-sample SD</th>
+<th style="text-align: right;">5-fold CV SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>model_1</code></td>
+<td style="text-align: right;">0.05045</td>
+<td style="text-align: right;">0.05073</td>
+<td style="text-align: right;">0.15247</td>
+<td style="text-align: right;">0.00356</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>model_2</code></td>
+<td style="text-align: right;">0.05975</td>
+<td style="text-align: right;">0.05922</td>
+<td style="text-align: right;">0.15035</td>
+<td style="text-align: right;">0.00360</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="k10" class="level3">
+<h3 class="anchored" data-anchor-id="k10">k=10</h3>
+<p><strong>Model 1</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>pit_lm1_cv <span class="ot">=</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> tyre_life,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> <span class="fu">vfold_cv</span>(miami2024, <span class="at">v =</span> <span class="dv">10</span>),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(mae, rmse)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>pit_lm1_cv <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 mae     standard   0.0510    10 0.00294 Preprocessor1_Model1
+2 rmse    standard   0.150     10 0.0109  Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get fold-by-fold results</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pit_lm1_cv <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 7
+   splits            id     .metric .estimator .estimate .config        .notes  
+   &lt;list&gt;            &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;          &lt;list&gt;  
+ 1 &lt;split [995/111]&gt; Fold01 mae     standard      0.0368 Preprocessor1… &lt;tibble&gt;
+ 2 &lt;split [995/111]&gt; Fold02 mae     standard      0.0544 Preprocessor1… &lt;tibble&gt;
+ 3 &lt;split [995/111]&gt; Fold03 mae     standard      0.0614 Preprocessor1… &lt;tibble&gt;
+ 4 &lt;split [995/111]&gt; Fold04 mae     standard      0.0472 Preprocessor1… &lt;tibble&gt;
+ 5 &lt;split [995/111]&gt; Fold05 mae     standard      0.0379 Preprocessor1… &lt;tibble&gt;
+ 6 &lt;split [995/111]&gt; Fold06 mae     standard      0.0602 Preprocessor1… &lt;tibble&gt;
+ 7 &lt;split [996/110]&gt; Fold07 mae     standard      0.0600 Preprocessor1… &lt;tibble&gt;
+ 8 &lt;split [996/110]&gt; Fold08 mae     standard      0.0434 Preprocessor1… &lt;tibble&gt;
+ 9 &lt;split [996/110]&gt; Fold09 mae     standard      0.0505 Preprocessor1… &lt;tibble&gt;
+10 &lt;split [996/110]&gt; Fold10 mae     standard      0.0581 Preprocessor1… &lt;tibble&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Based on the random folds above, the MAE was best for fold 1 with an MAE of approximately 0.037 and worst for fold 3 with an MAE of 0.061 approximately.</li>
+</ul>
+<p><strong>Model 2</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>pit_lm2_cv <span class="ot">=</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> lap_number <span class="sc">+</span> compound <span class="sc">+</span> tyre_life,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> <span class="fu">vfold_cv</span>(miami2024, <span class="at">v =</span> <span class="dv">10</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(mae, rmse)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>pit_lm2_cv <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 mae     standard   0.0594    10 0.00262 Preprocessor1_Model1
+2 rmse    standard   0.148     10 0.0104  Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get fold-by-fold results</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pit_lm2_cv <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 7
+   splits            id     .metric .estimator .estimate .config        .notes  
+   &lt;list&gt;            &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;          &lt;list&gt;  
+ 1 &lt;split [995/111]&gt; Fold01 mae     standard      0.0436 Preprocessor1… &lt;tibble&gt;
+ 2 &lt;split [995/111]&gt; Fold02 mae     standard      0.0616 Preprocessor1… &lt;tibble&gt;
+ 3 &lt;split [995/111]&gt; Fold03 mae     standard      0.0698 Preprocessor1… &lt;tibble&gt;
+ 4 &lt;split [995/111]&gt; Fold04 mae     standard      0.0566 Preprocessor1… &lt;tibble&gt;
+ 5 &lt;split [995/111]&gt; Fold05 mae     standard      0.0518 Preprocessor1… &lt;tibble&gt;
+ 6 &lt;split [995/111]&gt; Fold06 mae     standard      0.0658 Preprocessor1… &lt;tibble&gt;
+ 7 &lt;split [996/110]&gt; Fold07 mae     standard      0.0655 Preprocessor1… &lt;tibble&gt;
+ 8 &lt;split [996/110]&gt; Fold08 mae     standard      0.0521 Preprocessor1… &lt;tibble&gt;
+ 9 &lt;split [996/110]&gt; Fold09 mae     standard      0.0601 Preprocessor1… &lt;tibble&gt;
+10 &lt;split [996/110]&gt; Fold10 mae     standard      0.0671 Preprocessor1… &lt;tibble&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Based on the random folds above, MAE was best for fold 1 (0.044) and worst for fold 3 (0.070).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10-fold CV MAE and sd</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>pit_lm1_cv <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(.estimate), <span class="at">sd =</span> <span class="fu">sd</span>(.estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    mean      sd
+   &lt;dbl&gt;   &lt;dbl&gt;
+1 0.0510 0.00931</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pit_lm2_cv <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(.estimate), <span class="at">sd =</span> <span class="fu">sd</span>(.estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    mean      sd
+   &lt;dbl&gt;   &lt;dbl&gt;
+1 0.0594 0.00829</code></pre>
+</div>
+</div>
+<p>In-sample and 10-fold CV MAE and standard deviation for both models.</p>
+<table class="caption-top table">
+<caption></caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 18%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">In-sample MAE</th>
+<th style="text-align: right;">10-fold CV MAE</th>
+<th style="text-align: right;">In-sample SD</th>
+<th style="text-align: right;">10-fold CV SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>model_1</code></td>
+<td style="text-align: right;">0.05045</td>
+<td style="text-align: right;">0.05100</td>
+<td style="text-align: right;">0.15247</td>
+<td style="text-align: right;">0.00931</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>model_2</code></td>
+<td style="text-align: right;">0.05975</td>
+<td style="text-align: right;">0.05939</td>
+<td style="text-align: right;">0.15035</td>
+<td style="text-align: right;">0.00829</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="k-20" class="level3">
+<h3 class="anchored" data-anchor-id="k-20">k = 20</h3>
+<p><strong>Model 1</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>pit_lm1_k20 <span class="ot">=</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> tyre_life,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> <span class="fu">vfold_cv</span>(miami2024, <span class="at">v =</span> <span class="dv">20</span>),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(mae, rmse)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>pit_lm1_k20 <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 mae     standard   0.0509    20 0.00399 Preprocessor1_Model1
+2 rmse    standard   0.140     20 0.0142  Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get fold-by-fold results</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>pit_lm1_k20 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 7
+   splits            id     .metric .estimator .estimate .config        .notes  
+   &lt;list&gt;            &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;          &lt;list&gt;  
+ 1 &lt;split [1050/56]&gt; Fold01 mae     standard      0.0451 Preprocessor1… &lt;tibble&gt;
+ 2 &lt;split [1050/56]&gt; Fold02 mae     standard      0.0519 Preprocessor1… &lt;tibble&gt;
+ 3 &lt;split [1050/56]&gt; Fold03 mae     standard      0.0509 Preprocessor1… &lt;tibble&gt;
+ 4 &lt;split [1050/56]&gt; Fold04 mae     standard      0.0658 Preprocessor1… &lt;tibble&gt;
+ 5 &lt;split [1050/56]&gt; Fold05 mae     standard      0.0439 Preprocessor1… &lt;tibble&gt;
+ 6 &lt;split [1050/56]&gt; Fold06 mae     standard      0.0412 Preprocessor1… &lt;tibble&gt;
+ 7 &lt;split [1051/55]&gt; Fold07 mae     standard      0.0602 Preprocessor1… &lt;tibble&gt;
+ 8 &lt;split [1051/55]&gt; Fold08 mae     standard      0.0429 Preprocessor1… &lt;tibble&gt;
+ 9 &lt;split [1051/55]&gt; Fold09 mae     standard      0.0402 Preprocessor1… &lt;tibble&gt;
+10 &lt;split [1051/55]&gt; Fold10 mae     standard      0.0263 Preprocessor1… &lt;tibble&gt;
+11 &lt;split [1051/55]&gt; Fold11 mae     standard      0.0266 Preprocessor1… &lt;tibble&gt;
+12 &lt;split [1051/55]&gt; Fold12 mae     standard      0.0585 Preprocessor1… &lt;tibble&gt;
+13 &lt;split [1051/55]&gt; Fold13 mae     standard      0.0704 Preprocessor1… &lt;tibble&gt;
+14 &lt;split [1051/55]&gt; Fold14 mae     standard      0.0274 Preprocessor1… &lt;tibble&gt;
+15 &lt;split [1051/55]&gt; Fold15 mae     standard      0.0302 Preprocessor1… &lt;tibble&gt;
+16 &lt;split [1051/55]&gt; Fold16 mae     standard      0.0825 Preprocessor1… &lt;tibble&gt;
+17 &lt;split [1051/55]&gt; Fold17 mae     standard      0.0591 Preprocessor1… &lt;tibble&gt;
+18 &lt;split [1051/55]&gt; Fold18 mae     standard      0.0429 Preprocessor1… &lt;tibble&gt;
+19 &lt;split [1051/55]&gt; Fold19 mae     standard      0.0611 Preprocessor1… &lt;tibble&gt;
+20 &lt;split [1051/55]&gt; Fold20 mae     standard      0.0901 Preprocessor1… &lt;tibble&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Based on the random folds above, MAE was best for fold 10 (0.026) and worst for fold 20 (0.090).</li>
+</ul>
+<p><strong>Model 2</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>pit_lm2_k20 <span class="ot">=</span> lm_spec <span class="sc">%&gt;%</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    pit_in <span class="sc">~</span> lap_time <span class="sc">+</span> lap_number <span class="sc">+</span> compound <span class="sc">+</span> tyre_life,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> <span class="fu">vfold_cv</span>(miami2024, <span class="at">v =</span> <span class="dv">20</span>),</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(mae, rmse)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>pit_lm2_k20 <span class="sc">%&gt;%</span> <span class="fu">collect_metrics</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  .metric .estimator   mean     n std_err .config             
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;               
+1 mae     standard   0.0593    20 0.00398 Preprocessor1_Model1
+2 rmse    standard   0.139     20 0.0134  Preprocessor1_Model1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get fold-by-fold results</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>pit_lm2_k20 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 7
+   splits            id     .metric .estimator .estimate .config        .notes  
+   &lt;list&gt;            &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;          &lt;list&gt;  
+ 1 &lt;split [1050/56]&gt; Fold01 mae     standard      0.0508 Preprocessor1… &lt;tibble&gt;
+ 2 &lt;split [1050/56]&gt; Fold02 mae     standard      0.0623 Preprocessor1… &lt;tibble&gt;
+ 3 &lt;split [1050/56]&gt; Fold03 mae     standard      0.0564 Preprocessor1… &lt;tibble&gt;
+ 4 &lt;split [1050/56]&gt; Fold04 mae     standard      0.0755 Preprocessor1… &lt;tibble&gt;
+ 5 &lt;split [1050/56]&gt; Fold05 mae     standard      0.0596 Preprocessor1… &lt;tibble&gt;
+ 6 &lt;split [1050/56]&gt; Fold06 mae     standard      0.0535 Preprocessor1… &lt;tibble&gt;
+ 7 &lt;split [1051/55]&gt; Fold07 mae     standard      0.0652 Preprocessor1… &lt;tibble&gt;
+ 8 &lt;split [1051/55]&gt; Fold08 mae     standard      0.0492 Preprocessor1… &lt;tibble&gt;
+ 9 &lt;split [1051/55]&gt; Fold09 mae     standard      0.0474 Preprocessor1… &lt;tibble&gt;
+10 &lt;split [1051/55]&gt; Fold10 mae     standard      0.0324 Preprocessor1… &lt;tibble&gt;
+11 &lt;split [1051/55]&gt; Fold11 mae     standard      0.0347 Preprocessor1… &lt;tibble&gt;
+12 &lt;split [1051/55]&gt; Fold12 mae     standard      0.0630 Preprocessor1… &lt;tibble&gt;
+13 &lt;split [1051/55]&gt; Fold13 mae     standard      0.0818 Preprocessor1… &lt;tibble&gt;
+14 &lt;split [1051/55]&gt; Fold14 mae     standard      0.0362 Preprocessor1… &lt;tibble&gt;
+15 &lt;split [1051/55]&gt; Fold15 mae     standard      0.0405 Preprocessor1… &lt;tibble&gt;
+16 &lt;split [1051/55]&gt; Fold16 mae     standard      0.0838 Preprocessor1… &lt;tibble&gt;
+17 &lt;split [1051/55]&gt; Fold17 mae     standard      0.0652 Preprocessor1… &lt;tibble&gt;
+18 &lt;split [1051/55]&gt; Fold18 mae     standard      0.0537 Preprocessor1… &lt;tibble&gt;
+19 &lt;split [1051/55]&gt; Fold19 mae     standard      0.0724 Preprocessor1… &lt;tibble&gt;
+20 &lt;split [1051/55]&gt; Fold20 mae     standard      0.102  Preprocessor1… &lt;tibble&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Based on the random folds above, MAE was best for fold 10 (0.032) and worst for fold 20 (0.101).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 20-fold CV MAE and sd</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>pit_lm1_k20 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(.estimate), <span class="at">sd =</span> <span class="fu">sd</span>(.estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    mean     sd
+   &lt;dbl&gt;  &lt;dbl&gt;
+1 0.0509 0.0178</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pit_lm2_k20 <span class="sc">%&gt;%</span> <span class="fu">unnest</span>(.metrics) <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"mae"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(.estimate), <span class="at">sd =</span> <span class="fu">sd</span>(.estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+    mean     sd
+   &lt;dbl&gt;  &lt;dbl&gt;
+1 0.0593 0.0178</code></pre>
+</div>
+</div>
+<p>In-sample and 20-fold CV MAE and standard deviation for both models.</p>
+<table class="caption-top table">
+<caption></caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 18%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">In-sample MAE</th>
+<th style="text-align: right;">20-fold CV MAE</th>
+<th style="text-align: right;">In-sample SD</th>
+<th style="text-align: right;">20-fold CV SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>model_1</code></td>
+<td style="text-align: right;">0.05045</td>
+<td style="text-align: right;">0.05086</td>
+<td style="text-align: right;">0.15247</td>
+<td style="text-align: right;">0.01785</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>model_2</code></td>
+<td style="text-align: right;">0.05975</td>
+<td style="text-align: right;">0.05925</td>
+<td style="text-align: right;">0.15035</td>
+<td style="text-align: right;">0.01781</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="compare-different-values-of-k" class="level3">
+<h3 class="anchored" data-anchor-id="compare-different-values-of-k">Compare different values of k</h3>
+<table class="caption-top table">
+<caption></caption>
+<colgroup>
+<col style="width: 15%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: right;">In-sample MAE</th>
+<th style="text-align: right;">5-fold CV MAE</th>
+<th style="text-align: right;">10-fold CV MAE</th>
+<th style="text-align: right;">20-fold CV MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>model_1</code></td>
+<td style="text-align: right;">0.05045</td>
+<td style="text-align: right;">0.05073</td>
+<td style="text-align: right;">0.05100</td>
+<td style="text-align: right;">0.05086</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>model_2</code></td>
+<td style="text-align: right;">0.05975</td>
+<td style="text-align: right;">0.05922</td>
+<td style="text-align: right;">0.05939</td>
+<td style="text-align: right;">0.05925</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="final-model-based-on-the-smallest-cv-error" class="level2">
+<h2 class="anchored" data-anchor-id="final-model-based-on-the-smallest-cv-error">Final model based on the smallest CV error</h2>
+<p>All of the above results suggests <code>model_1</code> is the better model than <code>model_2</code>.</p>
+<p>Therefore, our final model based on the smallest CV error is:</p>
+<p><span class="math display">\[
+\mathbb{E}(pit\_in \mid lap\_time,\ tyre\_life) = \beta_0 + \beta_1(lap\_time) + \beta_2(tyre\_life)
+\]</span></p>
+</section>
+</section>
+<section id="logistic-regression-model" class="level1">
+<h1>Logistic Regression Model</h1>
+<section id="variables-of-interest" class="level2">
+<h2 class="anchored" data-anchor-id="variables-of-interest">Variables of interest</h2>
+<section id="predictors" class="level3">
+<h3 class="anchored" data-anchor-id="predictors">Predictors</h3>
+<ol type="1">
+<li><code>lap_time</code>: recorded time to complete a lap (seconds)</li>
+<li><code>lap_number</code>: lap number from which the telemetry data was recorded (number of laps)</li>
+<li><code>tyre_life</code>: number of laps completed on a set of tires (number of laps)</li>
+<li><code>compound</code>: type of tire used (SOFT, MEDIUM, HARD)</li>
+</ol>
+</section>
+<section id="response-variable" class="level3">
+<h3 class="anchored" data-anchor-id="response-variable">Response variable</h3>
+<ul>
+<li><p><code>pit_in</code>: whether a driver made a pit stop during a lap (binary: 0 = no pit stop, 1 = pit stop occurred)</p>
+<p><span class="math display">\[\begin{align*}
+Y_i &amp;= \begin{cases} 1 &amp; \text{ if a driver pitted on a lap } \\ 0 &amp; \text{ otherwise (i.e., the driver did not pit on lap)} \end{cases}
+\end{align*}\]</span></p></li>
+</ul>
+</section>
+</section>
+<section id="our-logistic-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="our-logistic-regression-model">Our logistic regression model</h2>
+<p>We are interested in determining the probability of making a pit stop during the 2024 Miami Grand Prix, considering factors such as lap time, track progress, tire age, and the type of tire used.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\log(odds(pit\_in \mid lap\_time, \ lap\_number, \ tyre\_life, \ compound)) &amp;= \beta_0 + \beta_1 (lap\_time) \\ &amp;+ \beta_2(lap\_number) + \beta_3 (tyre\_life) \\ &amp;+ \beta_4 \ I(compound = MEDIUM) \\ &amp;+ \beta_5 \ I(compound = SOFT)
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factor `pit_in` for logistic regression analysis</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>miami2024_glm <span class="ot">&lt;-</span> miami2024 <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pit_in_fac =</span> <span class="fu">as.factor</span>(pit_in))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># logistic regression model</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>logistic_fit <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">form   =</span> pit_in_fac <span class="sc">~</span> lap_time <span class="sc">+</span> lap_number <span class="sc">+</span> tyre_life <span class="sc">+</span> compound,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data   =</span> miami2024_glm,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">"binomial"</span>, <span class="co"># this is an argument to glm; response is 0 or 1, binomial</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"glm"</span>,      <span class="co"># method for fit; "generalized linear model"</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logistic_fit<span class="sc">$</span>finalModel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+NULL
+
+Coefficients:
+                Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)    -18.48162    2.27137  -8.137 4.06e-16 ***
+lap_time         0.13739    0.02007   6.846 7.58e-12 ***
+lap_number      -0.16001    0.03630  -4.408 1.04e-05 ***
+tyre_life        0.27508    0.04580   6.006 1.91e-09 ***
+compoundMEDIUM   0.49495    0.49718   0.996    0.319    
+compoundSOFT     1.86135    1.17923   1.578    0.114    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 261.16  on 1105  degrees of freedom
+Residual deviance: 176.46  on 1100  degrees of freedom
+AIC: 188.46
+
+Number of Fisher Scoring iterations: 8</code></pre>
+</div>
+</div>
+<section id="interpretation-of-exponentiated-hatbeta-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-exponentiated-hatbeta-coefficients">Interpretation of exponentiated <span class="math inline">\(\hat{\beta}\)</span> coefficients</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(logistic_fit<span class="sc">$</span>finalModel<span class="sc">$</span>coefficients)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   (Intercept)       lap_time     lap_number      tyre_life compoundMEDIUM 
+  9.408757e-09   1.147280e+00   8.521343e-01   1.316630e+00   1.640419e+00 
+  compoundSOFT 
+  6.432386e+00 </code></pre>
+</div>
+</div>
+<ul>
+<li><p><span class="math inline">\(\exp(\beta_0)\)</span>: The odds of a driver making a pit stop during a lap, when lap time is 0 seconds, lap number is 0, 0 laps have been completed on the current set of tires, and the HARD compound is, is approximately <span class="math inline">\(9.4088 \times 10^{-9}\)</span>.</p></li>
+<li><p><span class="math inline">\(\exp(\beta_1)\)</span>: For every of 1 second increase in lap time, the odds of a driver pitting increase by a factor of 1.1473.</p></li>
+<li><p><span class="math inline">\(\exp(\beta_2)\)</span>: For every additional lap (i.e., increase of 1 in the lap number), we expect the odds of a driver pitting to increase by a factor of 0.8521.</p></li>
+<li><p><span class="math inline">\(\exp(\beta_3)\)</span>: For each additional lap completed on the current set of tires, the odds of a driver pitting increase by a factor of 1.3166.</p></li>
+<li><p><span class="math inline">\(\exp(\beta_4)\)</span>: When using MEDIUM compound tires instead of HARD, the odds of a driver pitting increase by a factor of 1.6404, holding all other variables constant.</p></li>
+<li><p><span class="math inline">\(\exp(\beta_5)\)</span>: When using SOFT compound tires instead of HARD, we expect the odds of a driver pitting to increase by a factor of 6.4324, holding all other variables constant.</p></li>
+</ul>
+<section id="mathematically-derive-expbeta_1" class="level4">
+<h4 class="anchored" data-anchor-id="mathematically-derive-expbeta_1">Mathematically derive <span class="math inline">\(\exp(\beta_1)\)</span></h4>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\log(odds(pit\_in \mid lap\_time = a)) = -18.4816 + 0.1374a
+\\
+\\
+&amp;\log(odds(pit\_in \mid lap\_time = a+1)) = -18.4816 + 0.1374(a+1)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \log\left( \frac{odds(pit\_in \mid lap\_time = a+1)}{odds(pit\_in \mid lap\_time = a)} \right)\\
+&amp;= \log(odds(pit\_in \mid lap\_time = a+1)) - \log(odds(pit\_in \mid lap\_time = a)) \\
+&amp;= (-18.4816 + 0.1374(a+1)) - (-18.4816 + 0.1374) \\
+&amp;= 0.1374  \\
+&amp;= \hat{\beta_1}
+\end{aligned}
+\]</span></p>
+<p>Therefore, <span class="math inline">\(\exp(\beta_1) = e^{0.1374} = 1.1473\)</span></p>
+</section>
+</section>
+<section id="predicting-high-probability-of-a-pit-stop" class="level3">
+<h3 class="anchored" data-anchor-id="predicting-high-probability-of-a-pit-stop">Predicting High Probability of a Pit Stop</h3>
+<p>To predict a probability of a driver making a pit stop that is very close to 1, we need to input extreme values for the predictors. Based on the five-number summary of our data, we use the following scenario: a lap time of 148.74 seconds, lap number 57, SOFT compound, and a tire age of 45 laps.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># miami2024_glm %&gt;% </span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(aes(x=lap_time)) +</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8)</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(miami2024_glm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    lap_time        lap_number      compound     tyre_life    
+ Min.   : 90.63   Min.   : 1.00   HARD  :500   Min.   : 1.00  
+ 1st Qu.: 92.38   1st Qu.:14.00   MEDIUM:562   1st Qu.: 7.00  
+ Median : 93.28   Median :28.00   SOFT  : 44   Median :13.50  
+ Mean   : 96.00   Mean   :28.62                Mean   :14.78  
+ 3rd Qu.: 94.29   3rd Qu.:43.00                3rd Qu.:22.00  
+ Max.   :148.74   Max.   :57.00                Max.   :45.00  
+     pit_in        pit_in_fac
+ Min.   :0.00000   0:1078    
+ 1st Qu.:0.00000   1:  28    
+ Median :0.00000             
+ Mean   :0.02532             
+ 3rd Qu.:0.00000             
+ Max.   :1.00000             </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>log_prid_fst <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_fit<span class="sc">$</span>finalModel,</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">lap_time =</span> <span class="fl">148.74</span>,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">lap_number =</span> <span class="dv">57</span>,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">tyre_life =</span> <span class="dv">45</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">compoundMEDIUM =</span> <span class="dv">0</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">compoundSOFT =</span> <span class="dv">1</span>),</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>odds_pitting_fst <span class="ot">=</span> <span class="fu">exp</span>(log_prid_fst)</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>(<span class="at">prob_pitting_fst =</span> odds_pitting_fst<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>odds_pitting_fst))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1 
+0.7308921 </code></pre>
+</div>
+</div>
+<p>Using our logistic regression model, we estimate the probability of a pit stop under these conditions to be approximately 0.731. This indicates a high likelihood of a pit stop given these extreme race conditions.</p>
+</section>
+<section id="predicting-pit-stops-with-our-logistic-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="predicting-pit-stops-with-our-logistic-regression-model">Predicting Pit Stops with our Logistic Regression Model</h3>
+<ul>
+<li><p>Estimate the probability of a driver making a pit stop on a lap with the following conditions: 96.00 seconds lap time, 28th lap, 14.78 laps completed on a set of HARD tires.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>log_prid_hard <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_fit<span class="sc">$</span>finalModel,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">lap_time =</span> <span class="dv">96</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lap_number =</span> <span class="dv">28</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tyre_life =</span> <span class="fl">14.78</span>,</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">compoundMEDIUM =</span> <span class="dv">0</span>,</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">compoundSOFT =</span> <span class="dv">0</span>),</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>odds_pitting_hard <span class="ot">=</span> <span class="fu">exp</span>(log_prid_hard)</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>(<span class="at">prob_pitting_hard =</span> odds_pitting_hard<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>odds_pitting_hard))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1 
+0.5008283 </code></pre>
+</div>
+</div></li>
+</ul>
+<p>There is approximately a 50.08% probability that a driver will make a pit stop on this lap when using HARD tires, holding all other variables constant.</p>
+<!-- -->
+<ul>
+<li><p>Estimate the probability of a driver making a pit stop on a lap under the same conditions as above but using a set of MEDIUM tires.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>log_prid_med <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_fit<span class="sc">$</span>finalModel,</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">lap_time =</span> <span class="dv">96</span>,</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lap_number =</span> <span class="dv">28</span>,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tyre_life =</span> <span class="fl">14.78</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">compoundMEDIUM =</span> <span class="dv">1</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">compoundSOFT =</span> <span class="dv">0</span>),</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>odds_pitting_med <span class="ot">=</span> <span class="fu">exp</span>(log_prid_med)</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>(<span class="at">prob_pitting_med =</span> odds_pitting_med<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>odds_pitting_med))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1 
+0.5013559 </code></pre>
+</div>
+</div></li>
+</ul>
+<p>With MEDIUM tires, the probability of making a pit stop increases to 50.14%.</p>
+<!-- -->
+<ul>
+<li><p>Estimate the probability of a driver making a pit stop on a lap under the same conditions as above but using a set of SOFT tires.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>log_prid_soft <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistic_fit<span class="sc">$</span>finalModel,</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">lap_time =</span> <span class="dv">96</span>,</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">lap_number =</span> <span class="dv">28</span>,</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">tyre_life =</span> <span class="fl">14.78</span>,</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">compoundMEDIUM =</span> <span class="dv">0</span>,</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">compoundSOFT =</span> <span class="dv">1</span>),</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>odds_pitting_soft <span class="ot">=</span> <span class="fu">exp</span>(log_prid_soft)</span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>(<span class="at">prob_pitting_soft =</span> odds_pitting_soft<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>odds_pitting_soft))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        1 
+0.5052337 </code></pre>
+</div>
+</div></li>
+</ul>
+<p>With SOFT tires, the probability increases slightly to 50.52%.</p>
+<p>While all the other variables stay the same, we predict that the probability a driver to made a pit stop is higher if the driver is on a set of SOFT tires compared to other compounds.</p>
+</section>
+</section>
+<section id="proscons-of-logistic-regression-vs.-regular-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="proscons-of-logistic-regression-vs.-regular-linear-regression">Pros/Cons of logistic regression vs.&nbsp;regular linear regression</h2>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 90%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Pros</strong></td>
+<td><p>Since logistic regression is based on a Bernoulli/binomial likelihood, it is a natural model for binary outcomes.</p>
+<p>Coefficients are interpretable in terms of odds ratios (with log-odds as the linear predictor).</p></td>
+</tr>
+<tr class="even">
+<td><strong>Cons</strong></td>
+<td>The relationship between predictors and the probability is not linear.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression">Linear Regression</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 84%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Pros</strong></td>
+<td><p>Straightforward linear regression</p>
+<p>Easy to interpret the coefficients</p></td>
+</tr>
+<tr class="even">
+<td><strong>Cons</strong></td>
+<td>Cannot gaurantee that the predicted probabilities to be between 0 and 1.</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

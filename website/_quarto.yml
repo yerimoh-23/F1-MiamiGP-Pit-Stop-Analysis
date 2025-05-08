@@ -11,7 +11,7 @@ website:
       - href: about.qmd
         text: About
       - href: stat244.qmd
-        text: STAT244-SC
+        text: STAT-244SC
 
 format:
   html:

@@ -187,7 +187,7 @@ ggplot(compound_life, aes(x = compound, y = tyre_life, fill=compound)) +
 
 -   The tire compound directly affects tire life, and the relationship is based on a trade-off between performance (speed/grip) and durability. Therefore, the softer the compound, the shorter the tire life.
 
-**Number of pit stops for each compound**
+**Number of tires for each compound**
 
 ```{r}
 # new data that stores the tyre life at each pit stop
@@ -203,7 +203,7 @@ ggplot(compound_pit, aes(x = compound, fill=compound)) +
   theme_bw()
 ```
 
--   The tire compound directly affects tire life, and the relationship is based on a trade-off between performance (speed/grip) and durability. Therefore, the softer the compound, the shorter the tire life.
+-   Since the tire life is shorter for the softer compounds, but has a better performance, the drivers preferred MEDIUM tire to balance the trade-off.
 
 \newpage
 
@@ -359,10 +359,13 @@ pit_lm2_k5 %>% unnest(.metrics) %>%
 
 In-sample and 5-fold CV MAE and standard deviation for both models.
 
-| Model     | In-sample MAE | 5-fold CV MAE | In-sample SD | 5-fold CV SD |
-|:----------|--------------:|--------------:|-------------:|-------------:|
-| `model_1` |       0.05045 |       0.05073 |      0.15247 |      0.00356 |
-| `model_2` |       0.05975 |       0.05922 |      0.15035 |      0.00360 |
++------------+---------------+---------------+--------------+--------------+
+| Model      | In-sample MAE | 5-fold CV MAE | In-sample SD | 5-fold CV SD |
++:===========+==============:+==============:+=============:+=============:+
+| `model_1`  | 0.05045       | 0.05073       | 0.15247      | 0.00356      |
++------------+---------------+---------------+--------------+--------------+
+| `model_2`  | 0.05975       | 0.05922       | 0.15035      | 0.00360      |
++------------+---------------+---------------+--------------+--------------+
 
 : \vspace{10pt}
 
@@ -423,10 +426,13 @@ pit_lm2_cv %>% unnest(.metrics) %>%
 
 In-sample and 10-fold CV MAE and standard deviation for both models.
 
-| Model     | In-sample MAE | 10-fold CV MAE | In-sample SD | 10-fold CV SD |
-|:----------|--------------:|---------------:|-------------:|--------------:|
-| `model_1` |       0.05045 |        0.05100 |      0.15247 |       0.00931 |
-| `model_2` |       0.05975 |        0.05939 |      0.15035 |       0.00829 |
++------------+---------------+----------------+--------------+---------------+
+| Model      | In-sample MAE | 10-fold CV MAE | In-sample SD | 10-fold CV SD |
++:===========+==============:+===============:+=============:+==============:+
+| `model_1`  | 0.05045       | 0.05100        | 0.15247      | 0.00931       |
++------------+---------------+----------------+--------------+---------------+
+| `model_2`  | 0.05975       | 0.05939        | 0.15035      | 0.00829       |
++------------+---------------+----------------+--------------+---------------+
 
 : \vspace{10pt}
 
@@ -487,19 +493,25 @@ pit_lm2_k20 %>% unnest(.metrics) %>%
 
 In-sample and 20-fold CV MAE and standard deviation for both models.
 
-| Model     | In-sample MAE | 20-fold CV MAE | In-sample SD | 20-fold CV SD |
-|:----------|--------------:|---------------:|-------------:|--------------:|
-| `model_1` |       0.05045 |        0.05086 |      0.15247 |       0.01785 |
-| `model_2` |       0.05975 |        0.05925 |      0.15035 |       0.01781 |
++------------+---------------+----------------+--------------+---------------+
+| Model      | In-sample MAE | 20-fold CV MAE | In-sample SD | 20-fold CV SD |
++:===========+==============:+===============:+=============:+==============:+
+| `model_1`  | 0.05045       | 0.05086        | 0.15247      | 0.01785       |
++------------+---------------+----------------+--------------+---------------+
+| `model_2`  | 0.05975       | 0.05925        | 0.15035      | 0.01781       |
++------------+---------------+----------------+--------------+---------------+
 
 : \vspace{10pt}
 
 ### Compare different values of k
 
-| Model     | In-sample MAE | 5-fold CV MAE | 10-fold CV MAE | 20-fold CV MAE |
-|:----------|--------------:|--------------:|---------------:|---------------:|
-| `model_1` |       0.05045 |       0.05073 |        0.05100 |        0.05086 |
-| `model_2` |       0.05975 |       0.05922 |        0.05939 |        0.05925 |
++------------+---------------+---------------+----------------+----------------+
+| Model      | In-sample MAE | 5-fold CV MAE | 10-fold CV MAE | 20-fold CV MAE |
++:===========+==============:+==============:+===============:+===============:+
+| `model_1`  | 0.05045       | 0.05073       | 0.05100        | 0.05086        |
++------------+---------------+---------------+----------------+----------------+
+| `model_2`  | 0.05975       | 0.05922       | 0.05939        | 0.05925        |
++------------+---------------+---------------+----------------+----------------+
 
 : \vspace{10pt}
 
@@ -692,20 +704,20 @@ While all the other variables stay the same, we predict that the probability a d
 
 ### Logistic Regression
 
-+----------+-------------------------------------------------------------------------------------------------------------------+
-| **Pros** | Since logistic regression is based on a Bernoulli/binomial likelihood, it is a natural model for binary outcomes. |
-|          |                                                                                                                   |
-|          | Coefficients are interpretable in terms of odds ratios (with log-odds as the linear predictor).                   |
-+----------+-------------------------------------------------------------------------------------------------------------------+
-| **Cons** | The relationship between predictors and the probability is not linear.                                            |
-+----------+-------------------------------------------------------------------------------------------------------------------+
++-----------+-------------------------------------------------------------------------------------------------------------------+
+| **Pros**  | Since logistic regression is based on a Bernoulli/binomial likelihood, it is a natural model for binary outcomes. |
+|           |                                                                                                                   |
+|           | Coefficients are interpretable in terms of odds ratios (with log-odds as the linear predictor).                   |
++-----------+-------------------------------------------------------------------------------------------------------------------+
+| **Cons**  | The relationship between predictors and the probability is not linear.                                            |
++-----------+-------------------------------------------------------------------------------------------------------------------+
 
 ### Linear Regression
 
-+----------+--------------------------------------------------------------------------+
-| **Pros** | Straightforward linear regression                                        |
-|          |                                                                          |
-|          | Easy to interpret the coefficients                                       |
-+----------+--------------------------------------------------------------------------+
-| **Cons** | Cannot gaurantee that the predicted probabilities to be between 0 and 1. |
-+----------+--------------------------------------------------------------------------+
++-------------+--------------------------------------------------------------------------+
+| **Pros**    | Straightforward linear regression                                        |
+|             |                                                                          |
+|             | Easy to interpret the coefficients                                       |
++-------------+--------------------------------------------------------------------------+
+| **Cons**    | Cannot gaurantee that the predicted probabilities to be between 0 and 1. |
++-------------+--------------------------------------------------------------------------+
