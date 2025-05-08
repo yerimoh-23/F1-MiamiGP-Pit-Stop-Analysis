@@ -1,5 +1,5 @@
-doc/** linguist-documentation=false
-doc/** linguist-vendored=false
+docs/** linguist-documentation=false
+docs/** linguist-vendored=false
 
 *.Rmd linguist-detectable=true
 *.Rmd linguist-language=R
