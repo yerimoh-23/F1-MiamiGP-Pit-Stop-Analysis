@@ -334,6 +334,6 @@ However, strategic race decisions introduce inherent uncertainty, limiting predi
 - 예측 정밀도는 모터스포츠의 전략적 불확실성으로 인해 본질적 한계 있음
 
   Predictive precision has inherent limits due to the strategic uncertainty in motorsport decision-making
-- 향후 개선: 멀티 레이스 데이터 통합, 팀별 전략 패턴 고정효과 추가Future improvements: multi-race data integration, team-level fixed effects for strategy patterns
+- 향후 개선: 멀티 레이스 데이터 통합, 팀별 전략 패턴 고정효과 추가
 
   Future improvements: multi-race data integration, team-level fixed effects for strategy patterns
